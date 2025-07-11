@@ -34,6 +34,9 @@ ament_target_dependencies(imu_publisher rclcpp sensor_msgs)
 add_executable(multi_subscriber src/multi_subscriber.cpp)
 ament_target_dependencies(multi_subscriber rclcpp sensor_msgs)
 
+add_executable(fusion_node src/fusion_node.cpp)
+ament_target_dependencies(fusion_node rclcpp sensor_msgs)
+
 # Install all executables
 install(TARGETS
   talker
@@ -41,6 +44,7 @@ install(TARGETS
   gps_publisher
   imu_publisher
   multi_subscriber
+  fusion_node
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
