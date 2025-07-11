@@ -237,6 +237,12 @@ ros2 node info /fusion_node
 - Simple averaging logic for position fusion
 - Synchronized data processing
 
+## 🔥 Profiling Example
+
+Here’s a sample htop screenshot showing CPU usage during Phase 4:
+
+![htop](docs/htop.png)
+
 ### 🚀 Future Phases
 - Advanced fusion algorithms (Kalman filtering)
 - Real-time performance optimization
