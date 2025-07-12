@@ -221,6 +221,24 @@ ros2 node list
 ros2 node info /fusion_node
 ```
 
+### System Performance Monitoring
+```bash
+# Monitor CPU usage of ROS 2 nodes
+htop
+
+# Filter to see only ROS 2 processes
+htop -p $(pgrep -d',' ros2)
+
+# Monitor system resources while running nodes
+top -p $(pgrep -d',' -f "ros2|cpp_pubsub")
+```
+
+**Performance Tips:**
+- Use `htop` to monitor CPU usage when running multiple nodes
+- Check memory consumption during sensor fusion operations
+- Monitor system load when running all nodes simultaneously
+- Consider node priority if system resources are limited
+
 ## 🎯 Development Phases
 
 ### ✅ Phase 1: Basic Communication
@@ -236,14 +254,18 @@ ros2 node info /fusion_node
 - Fusion node combining GPS and IMU data
 - Simple averaging logic for position fusion
 - Synchronized data processing
+- CPU usage monitoring with htop
 
 ## 🔥 Profiling Example
 
-Here’s a sample htop screenshot showing CPU usage during Phase 4:
+Here's a sample htop screenshot showing CPU usage during Phase 4:
 
 ![htop](docs/htop.png)
 
-### 🚀 Future Phases
+*Screenshot shows ROS 2 nodes running with their respective CPU usage percentages*
+
+## 🚀 Future Phases
+
 - Advanced fusion algorithms (Kalman filtering)
 - Real-time performance optimization
 - Additional sensor types
