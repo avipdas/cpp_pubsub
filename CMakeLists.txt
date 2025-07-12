@@ -37,6 +37,11 @@ ament_target_dependencies(multi_subscriber rclcpp sensor_msgs)
 add_executable(fusion_node src/fusion_node.cpp)
 ament_target_dependencies(fusion_node rclcpp sensor_msgs)
 
+add_executable(ekf_node src/ekf_node.cpp)
+find_package(Eigen3 REQUIRED)
+ament_target_dependencies(ekf_node rclcpp sensor_msgs geometry_msgs)
+target_link_libraries(ekf_node Eigen3::Eigen)
+
 # Install all executables
 install(TARGETS
   talker
@@ -45,6 +50,8 @@ install(TARGETS
   imu_publisher
   multi_subscriber
   fusion_node
+  ekf_node
+
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
