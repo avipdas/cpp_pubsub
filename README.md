@@ -24,7 +24,7 @@ This package provides practical examples of ROS 2 communication patterns using C
 | `imu_publisher` | Publisher | Simulates IMU sensor data on `/imu_topic` |
 | `multi_subscriber` | Subscriber | Listens to both GPS and IMU topics simultaneously |
 | `fusion_node` | Fusion | Combines GPS and IMU data with averaging logic |
-| 'ekf_fusion_node' | EKF Fusion | Advanced sensor fusion using Extended Kalman Filter |
+| `ekf_fusion_node` | EKF Fusion | Advanced sensor fusion using Extended Kalman Filter |
 
 ### Topic Architecture
 
