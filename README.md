@@ -266,10 +266,14 @@ bash# Profile a specific ROS 2 node
 perf record -g ros2 run cpp_pubsub fusion_node
 
 #### Generate flame graph
+```bash
 perf script | flamegraph.pl > fusion_profile.svg
+```
 
 #### Monitor real-time performance
+```bash
 perf top -p $(pgrep fusion_node)
+```
 
 #### CPU usage monitoring
 Here's a sample htop screenshot showing CPU usage during Phase 4:
