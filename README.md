@@ -288,10 +288,14 @@ Performance comparison before/after optimizations
 Goal: Apply advanced sensor fusion using Extended Kalman Filter (EKF) logic
 Implementation Details
 State Vector:
-cpp// State: [x, y, vx, vy, ax, ay]
+```cpp
+// State: [x, y, vx, vy, ax, ay]
 Eigen::VectorXd state(6);
+```
+
 EKF Node Structure:
-cppclass EKFNode : public rclcpp::Node {
+```cpp
+class EKFNode : public rclcpp::Node {
 private:
     void predict();           // Time update
     void update_gps();        // GPS measurement update
@@ -302,6 +306,8 @@ private:
     Eigen::MatrixXd R_gps;    // GPS measurement noise
     Eigen::MatrixXd R_imu;    // IMU measurement noise
 };
+```
+
 Usage Example
 Terminal 1 - GPS publisher
 ```bash
