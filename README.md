@@ -284,7 +284,7 @@ Flame graph visualization of fusion node
 Identified bottlenecks and optimization opportunities
 Performance comparison before/after optimizations
 
-###Phase 5: Implement Kalman Filter
+### Phase 5: Implement Kalman Filter
 Goal: Apply advanced sensor fusion using Extended Kalman Filter (EKF) logic
 Implementation Details
 State Vector:
@@ -303,23 +303,27 @@ private:
     Eigen::MatrixXd R_imu;    // IMU measurement noise
 };
 Usage Example
-bash# Terminal 1 - GPS publisher
+Terminal 1 - GPS publisher
+```bash
 ros2 run cpp_pubsub gps_publisher
-
-# Terminal 2 - IMU publisher  
+```
+Terminal 2 - IMU publisher 
+```bash
 ros2 run cpp_pubsub imu_publisher
+```
 
-# Terminal 3 - EKF fusion node
+Terminal 3 - EKF fusion node
+```bash
 ros2 run cpp_pubsub ekf_fusion_node
-Deliverables
+```
 
+Deliverables
 EKF fusion node implementation
 Comparison with simple averaging fusion
 State estimation accuracy metrics
 Real-time filtered pose output on /filtered_pose topic
 
 Performance Metrics
-
 Position estimation accuracy (RMSE)
 Velocity estimation stability
 Filter convergence time
