@@ -284,4 +284,46 @@ Flame graph visualization of fusion node
 Identified bottlenecks and optimization opportunities
 Performance comparison before/after optimizations
 
+###Phase 5: Implement Kalman Filter
+Goal: Apply advanced sensor fusion using Extended Kalman Filter (EKF) logic
+Implementation Details
+State Vector:
+cpp// State: [x, y, vx, vy, ax, ay]
+Eigen::VectorXd state(6);
+EKF Node Structure:
+cppclass EKFNode : public rclcpp::Node {
+private:
+    void predict();           // Time update
+    void update_gps();        // GPS measurement update
+    void update_imu();        // IMU measurement update
+    
+    Eigen::MatrixXd P;        // Covariance matrix
+    Eigen::MatrixXd Q;        // Process noise
+    Eigen::MatrixXd R_gps;    // GPS measurement noise
+    Eigen::MatrixXd R_imu;    // IMU measurement noise
+};
+Usage Example
+bash# Terminal 1 - GPS publisher
+ros2 run cpp_pubsub gps_publisher
+
+# Terminal 2 - IMU publisher  
+ros2 run cpp_pubsub imu_publisher
+
+# Terminal 3 - EKF fusion node
+ros2 run cpp_pubsub ekf_fusion_node
+Deliverables
+
+EKF fusion node implementation
+Comparison with simple averaging fusion
+State estimation accuracy metrics
+Real-time filtered pose output on /filtered_pose topic
+
+Performance Metrics
+
+Position estimation accuracy (RMSE)
+Velocity estimation stability
+Filter convergence time
+Computational efficiency vs. simple fusion
+
+
 > **Note**: Remember to source your workspace (`source install/local_setup.bash`) in each new terminal before running ROS 2 commands.
