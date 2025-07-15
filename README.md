@@ -256,7 +256,7 @@ top -p $(pgrep -d',' -f "ros2|cpp_pubsub")
 - Synchronized data processing
 - CPU usage monitoring with htop
 
-## 🔥 ✅ Phase 4: Profiling and Bottleneck Analysis
+### 🔥 ✅ Phase 4: Profiling and Bottleneck Analysis
 Goal: Learn to profile ROS 2 code for performance optimization
 Setup & Installation
 Install profiling tools:
