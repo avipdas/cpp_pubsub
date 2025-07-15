@@ -256,34 +256,32 @@ top -p $(pgrep -d',' -f "ros2|cpp_pubsub")
 - Synchronized data processing
 - CPU usage monitoring with htop
 
-## 🔥 Profiling Example
+## 🔥 ✅ Phase 4: Profiling and Bottleneck Analysis
+Goal: Learn to profile ROS 2 code for performance optimization
+Setup & Installation
+Install profiling tools:
+bashsudo apt install linux-tools-common linux-tools-generic
+Profiling Commands
+bash# Profile a specific ROS 2 node
+perf record -g ros2 run cpp_pubsub fusion_node
 
+# Generate flame graph
+perf script | flamegraph.pl > fusion_profile.svg
+
+# Monitor real-time performance
+perf top -p $(pgrep fusion_node)
+
+# CPU usage monitoring
 Here's a sample htop screenshot showing CPU usage during Phase 4:
 
 ![htop](docs/htop.png)
 
 *Screenshot shows ROS 2 nodes running with their respective CPU usage percentages*
 
-## 🚀 Future Phases
-
-- Advanced fusion algorithms (Kalman filtering)
-- Real-time performance optimization
-- Additional sensor types
-- Parameter configuration
-
-## 🤝 Contributing
-
-Feel free to extend this package with:
-- More sophisticated fusion algorithms
-- Additional sensor types
-- Service and action examples
-- Parameter configuration
-- Real sensor hardware integration
-
-## 📄 License
-
-This package is provided as an educational example for ROS 2 development.
-
----
+Deliverables
+Performance baseline measurements
+Flame graph visualization of fusion node
+Identified bottlenecks and optimization opportunities
+Performance comparison before/after optimizations
 
 > **Note**: Remember to source your workspace (`source install/local_setup.bash`) in each new terminal before running ROS 2 commands.
