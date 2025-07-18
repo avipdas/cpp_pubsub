@@ -3,26 +3,28 @@
 #include "sensor_msgs/msg/nav_sat_fix.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include <Eigen/Dense>
+#include <cuda_runtime.h>
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
+
+extern "C" void launch_kalman_update(float* x, float* P, const float* gps, float* K_out);
+
 
 class EKFNode : public rclcpp::Node
 {
 public:
   EKFNode() : Node("ekf_node")
   {
+    RCLCPP_INFO(this->get_logger(), "EKF Node initialized.");
     gps_sub_ = this->create_subscription<sensor_msgs::msg::NavSatFix>(
-      "gps_topic", 10,
-      std::bind(&EKFNode::gps_callback, this, std::placeholders::_1));
+      "/gps_topic", 10, std::bind(&EKFNode::gps_callback, this, std::placeholders::_1));
 
     imu_sub_ = this->create_subscription<sensor_msgs::msg::Imu>(
-      "imu_topic", 10,
-      std::bind(&EKFNode::imu_callback, this, std::placeholders::_1));
+      "/imu_topic", 10, std::bind(&EKFNode::imu_callback, this, std::placeholders::_1));
 
     pose_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("filtered_pose", 10);
 
-    // Initialize state vector [x, y, vx, vy]
     x_ = VectorXd::Zero(4);
     P_ = MatrixXd::Identity(4, 4);
 
@@ -30,9 +32,8 @@ public:
   }
 
 private:
-  VectorXd x_;   // state vector
-  MatrixXd P_;   // covariance
-
+  VectorXd x_;
+  MatrixXd P_;
   rclcpp::Time last_time_;
 
   rclcpp::Subscription<sensor_msgs::msg::NavSatFix>::SharedPtr gps_sub_;
@@ -46,26 +47,40 @@ private:
     x_(2) += ax * dt;
     x_(3) += ay * dt;
 
-    // Simplified covariance update
     P_ = P_ + MatrixXd::Identity(4, 4) * 0.1;
   }
 
   void update(double gps_x, double gps_y)
   {
-    VectorXd z(2);
-    z << gps_x, gps_y;
+    float x_host[4] = {static_cast<float>(x_(0)), static_cast<float>(x_(1)), static_cast<float>(x_(2)), static_cast<float>(x_(3))};
+    float P_host[16];
+    for (int i = 0; i < 4; ++i)
+      for (int j = 0; j < 4; ++j)
+        P_host[i * 4 + j] = static_cast<float>(P_(i, j));
+    float gps_host[2] = {static_cast<float>(gps_x), static_cast<float>(gps_y)};
+    //float K_host[8] = {0};
 
-    VectorXd y = z - x_.head(2);
-    MatrixXd H = MatrixXd::Zero(2, 4);
-    H(0, 0) = 1;
-    H(1, 1) = 1;
+    float *x_dev, *P_dev, *gps_dev, *K_dev;
+    cudaMalloc(&x_dev, 4 * sizeof(float));
+    cudaMalloc(&P_dev, 16 * sizeof(float));
+    cudaMalloc(&gps_dev, 2 * sizeof(float));
+    cudaMalloc(&K_dev, 8 * sizeof(float));
 
-    MatrixXd R = MatrixXd::Identity(2, 2) * 0.5;
-    MatrixXd S = H * P_ * H.transpose() + R;
-    MatrixXd K = P_ * H.transpose() * S.inverse();
+    cudaMemcpy(x_dev, x_host, 4 * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(P_dev, P_host, 16 * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(gps_dev, gps_host, 2 * sizeof(float), cudaMemcpyHostToDevice);
 
-    x_ = x_ + K * y;
-    P_ = (MatrixXd::Identity(4, 4) - K * H) * P_;
+    launch_kalman_update(x_dev, P_dev, gps_dev, K_dev);
+    cudaDeviceSynchronize();
+
+    cudaMemcpy(x_host, x_dev, 4 * sizeof(float), cudaMemcpyDeviceToHost);
+
+    x_(0) = x_host[0];
+    x_(1) = x_host[1];
+    x_(2) = x_host[2];
+    x_(3) = x_host[3];
+
+    cudaFree(x_dev); cudaFree(P_dev); cudaFree(gps_dev); cudaFree(K_dev);
 
     geometry_msgs::msg::PoseStamped pose_msg;
     pose_msg.header.stamp = this->now();
@@ -77,6 +92,7 @@ private:
 
   void gps_callback(const sensor_msgs::msg::NavSatFix::SharedPtr msg)
   {
+    RCLCPP_INFO(this->get_logger(), "Received GPS: lat=%f, lon=%f", msg->latitude, msg->longitude);
     update(msg->latitude, msg->longitude);
   }
 
@@ -89,6 +105,7 @@ private:
     double ax = msg->linear_acceleration.x;
     double ay = msg->linear_acceleration.y;
 
+    RCLCPP_INFO(this->get_logger(), "Received IMU: ax=%f, ay=%f, dt=%f", ax, ay, dt);
     predict(ax, ay, dt);
   }
 };

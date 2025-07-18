@@ -14,6 +14,8 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+enable_language(CUDA)
+
 
 # Original talker and listener
 add_executable(talker publisher_lambda_function.cpp)
@@ -37,10 +39,14 @@ ament_target_dependencies(multi_subscriber rclcpp sensor_msgs)
 add_executable(fusion_node src/fusion_node.cpp)
 ament_target_dependencies(fusion_node rclcpp sensor_msgs)
 
+# Compile CUDA kernel
+add_library(ekf_update STATIC cuda/ekf_update.cu)
+set_target_properties(ekf_update PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
+
 add_executable(ekf_node src/ekf_node.cpp)
 find_package(Eigen3 REQUIRED)
 ament_target_dependencies(ekf_node rclcpp sensor_msgs geometry_msgs)
-target_link_libraries(ekf_node Eigen3::Eigen)
+target_link_libraries(ekf_node Eigen3::Eigen ekf_update)
 
 # Install all executables
 install(TARGETS

@@ -223,6 +223,108 @@ listener/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/listener.dir/build.make CMakeFiles/listener.dir/build
 .PHONY : listener/fast
 
+#=============================================================================
+# Target rules for targets named gps_publisher
+
+# Build rule for target.
+gps_publisher: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gps_publisher
+.PHONY : gps_publisher
+
+# fast build rule for target.
+gps_publisher/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gps_publisher.dir/build.make CMakeFiles/gps_publisher.dir/build
+.PHONY : gps_publisher/fast
+
+#=============================================================================
+# Target rules for targets named imu_publisher
+
+# Build rule for target.
+imu_publisher: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 imu_publisher
+.PHONY : imu_publisher
+
+# fast build rule for target.
+imu_publisher/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imu_publisher.dir/build.make CMakeFiles/imu_publisher.dir/build
+.PHONY : imu_publisher/fast
+
+#=============================================================================
+# Target rules for targets named multi_subscriber
+
+# Build rule for target.
+multi_subscriber: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 multi_subscriber
+.PHONY : multi_subscriber
+
+# fast build rule for target.
+multi_subscriber/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/multi_subscriber.dir/build.make CMakeFiles/multi_subscriber.dir/build
+.PHONY : multi_subscriber/fast
+
+#=============================================================================
+# Target rules for targets named fusion_node
+
+# Build rule for target.
+fusion_node: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 fusion_node
+.PHONY : fusion_node
+
+# fast build rule for target.
+fusion_node/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fusion_node.dir/build.make CMakeFiles/fusion_node.dir/build
+.PHONY : fusion_node/fast
+
+#=============================================================================
+# Target rules for targets named ekf_update
+
+# Build rule for target.
+ekf_update: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ekf_update
+.PHONY : ekf_update
+
+# fast build rule for target.
+ekf_update/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ekf_update.dir/build.make CMakeFiles/ekf_update.dir/build
+.PHONY : ekf_update/fast
+
+#=============================================================================
+# Target rules for targets named ekf_node
+
+# Build rule for target.
+ekf_node: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ekf_node
+.PHONY : ekf_node
+
+# fast build rule for target.
+ekf_node/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ekf_node.dir/build.make CMakeFiles/ekf_node.dir/build
+.PHONY : ekf_node/fast
+
+cuda/ekf_update.o: cuda/ekf_update.cu.o
+.PHONY : cuda/ekf_update.o
+
+# target to build an object file
+cuda/ekf_update.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ekf_update.dir/build.make CMakeFiles/ekf_update.dir/cuda/ekf_update.cu.o
+.PHONY : cuda/ekf_update.cu.o
+
+cuda/ekf_update.i: cuda/ekf_update.cu.i
+.PHONY : cuda/ekf_update.i
+
+# target to preprocess a source file
+cuda/ekf_update.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ekf_update.dir/build.make CMakeFiles/ekf_update.dir/cuda/ekf_update.cu.i
+.PHONY : cuda/ekf_update.cu.i
+
+cuda/ekf_update.s: cuda/ekf_update.cu.s
+.PHONY : cuda/ekf_update.s
+
+# target to generate assembly for a file
+cuda/ekf_update.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ekf_update.dir/build.make CMakeFiles/ekf_update.dir/cuda/ekf_update.cu.s
+.PHONY : cuda/ekf_update.cu.s
+
 publisher_lambda_function.o: publisher_lambda_function.cpp.o
 .PHONY : publisher_lambda_function.o
 
@@ -246,6 +348,126 @@ publisher_lambda_function.s: publisher_lambda_function.cpp.s
 publisher_lambda_function.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/talker.dir/build.make CMakeFiles/talker.dir/publisher_lambda_function.cpp.s
 .PHONY : publisher_lambda_function.cpp.s
+
+src/ekf_node.o: src/ekf_node.cpp.o
+.PHONY : src/ekf_node.o
+
+# target to build an object file
+src/ekf_node.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ekf_node.dir/build.make CMakeFiles/ekf_node.dir/src/ekf_node.cpp.o
+.PHONY : src/ekf_node.cpp.o
+
+src/ekf_node.i: src/ekf_node.cpp.i
+.PHONY : src/ekf_node.i
+
+# target to preprocess a source file
+src/ekf_node.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ekf_node.dir/build.make CMakeFiles/ekf_node.dir/src/ekf_node.cpp.i
+.PHONY : src/ekf_node.cpp.i
+
+src/ekf_node.s: src/ekf_node.cpp.s
+.PHONY : src/ekf_node.s
+
+# target to generate assembly for a file
+src/ekf_node.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ekf_node.dir/build.make CMakeFiles/ekf_node.dir/src/ekf_node.cpp.s
+.PHONY : src/ekf_node.cpp.s
+
+src/fusion_node.o: src/fusion_node.cpp.o
+.PHONY : src/fusion_node.o
+
+# target to build an object file
+src/fusion_node.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fusion_node.dir/build.make CMakeFiles/fusion_node.dir/src/fusion_node.cpp.o
+.PHONY : src/fusion_node.cpp.o
+
+src/fusion_node.i: src/fusion_node.cpp.i
+.PHONY : src/fusion_node.i
+
+# target to preprocess a source file
+src/fusion_node.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fusion_node.dir/build.make CMakeFiles/fusion_node.dir/src/fusion_node.cpp.i
+.PHONY : src/fusion_node.cpp.i
+
+src/fusion_node.s: src/fusion_node.cpp.s
+.PHONY : src/fusion_node.s
+
+# target to generate assembly for a file
+src/fusion_node.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fusion_node.dir/build.make CMakeFiles/fusion_node.dir/src/fusion_node.cpp.s
+.PHONY : src/fusion_node.cpp.s
+
+src/gps_publisher.o: src/gps_publisher.cpp.o
+.PHONY : src/gps_publisher.o
+
+# target to build an object file
+src/gps_publisher.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gps_publisher.dir/build.make CMakeFiles/gps_publisher.dir/src/gps_publisher.cpp.o
+.PHONY : src/gps_publisher.cpp.o
+
+src/gps_publisher.i: src/gps_publisher.cpp.i
+.PHONY : src/gps_publisher.i
+
+# target to preprocess a source file
+src/gps_publisher.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gps_publisher.dir/build.make CMakeFiles/gps_publisher.dir/src/gps_publisher.cpp.i
+.PHONY : src/gps_publisher.cpp.i
+
+src/gps_publisher.s: src/gps_publisher.cpp.s
+.PHONY : src/gps_publisher.s
+
+# target to generate assembly for a file
+src/gps_publisher.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gps_publisher.dir/build.make CMakeFiles/gps_publisher.dir/src/gps_publisher.cpp.s
+.PHONY : src/gps_publisher.cpp.s
+
+src/imu_publisher.o: src/imu_publisher.cpp.o
+.PHONY : src/imu_publisher.o
+
+# target to build an object file
+src/imu_publisher.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imu_publisher.dir/build.make CMakeFiles/imu_publisher.dir/src/imu_publisher.cpp.o
+.PHONY : src/imu_publisher.cpp.o
+
+src/imu_publisher.i: src/imu_publisher.cpp.i
+.PHONY : src/imu_publisher.i
+
+# target to preprocess a source file
+src/imu_publisher.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imu_publisher.dir/build.make CMakeFiles/imu_publisher.dir/src/imu_publisher.cpp.i
+.PHONY : src/imu_publisher.cpp.i
+
+src/imu_publisher.s: src/imu_publisher.cpp.s
+.PHONY : src/imu_publisher.s
+
+# target to generate assembly for a file
+src/imu_publisher.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imu_publisher.dir/build.make CMakeFiles/imu_publisher.dir/src/imu_publisher.cpp.s
+.PHONY : src/imu_publisher.cpp.s
+
+src/multi_subscriber.o: src/multi_subscriber.cpp.o
+.PHONY : src/multi_subscriber.o
+
+# target to build an object file
+src/multi_subscriber.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/multi_subscriber.dir/build.make CMakeFiles/multi_subscriber.dir/src/multi_subscriber.cpp.o
+.PHONY : src/multi_subscriber.cpp.o
+
+src/multi_subscriber.i: src/multi_subscriber.cpp.i
+.PHONY : src/multi_subscriber.i
+
+# target to preprocess a source file
+src/multi_subscriber.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/multi_subscriber.dir/build.make CMakeFiles/multi_subscriber.dir/src/multi_subscriber.cpp.i
+.PHONY : src/multi_subscriber.cpp.i
+
+src/multi_subscriber.s: src/multi_subscriber.cpp.s
+.PHONY : src/multi_subscriber.s
+
+# target to generate assembly for a file
+src/multi_subscriber.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/multi_subscriber.dir/build.make CMakeFiles/multi_subscriber.dir/src/multi_subscriber.cpp.s
+.PHONY : src/multi_subscriber.cpp.s
 
 subscriber_lambda_function.o: subscriber_lambda_function.cpp.o
 .PHONY : subscriber_lambda_function.o
@@ -286,11 +508,35 @@ help:
 	@echo "... test"
 	@echo "... cpp_pubsub_uninstall"
 	@echo "... uninstall"
+	@echo "... ekf_node"
+	@echo "... ekf_update"
+	@echo "... fusion_node"
+	@echo "... gps_publisher"
+	@echo "... imu_publisher"
 	@echo "... listener"
+	@echo "... multi_subscriber"
 	@echo "... talker"
+	@echo "... cuda/ekf_update.o"
+	@echo "... cuda/ekf_update.i"
+	@echo "... cuda/ekf_update.s"
 	@echo "... publisher_lambda_function.o"
 	@echo "... publisher_lambda_function.i"
 	@echo "... publisher_lambda_function.s"
+	@echo "... src/ekf_node.o"
+	@echo "... src/ekf_node.i"
+	@echo "... src/ekf_node.s"
+	@echo "... src/fusion_node.o"
+	@echo "... src/fusion_node.i"
+	@echo "... src/fusion_node.s"
+	@echo "... src/gps_publisher.o"
+	@echo "... src/gps_publisher.i"
+	@echo "... src/gps_publisher.s"
+	@echo "... src/imu_publisher.o"
+	@echo "... src/imu_publisher.i"
+	@echo "... src/imu_publisher.s"
+	@echo "... src/multi_subscriber.o"
+	@echo "... src/multi_subscriber.i"
+	@echo "... src/multi_subscriber.s"
 	@echo "... subscriber_lambda_function.o"
 	@echo "... subscriber_lambda_function.i"
 	@echo "... subscriber_lambda_function.s"
